@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>example</groupId>
-	<artifactId>loose-rules-wih</artifactId>
+	<artifactId>email-template-wih</artifactId>
 	<version>1.0.2-SNAPSHOT</version>
 	<description>Work Item Handler to call rules from a loosely coupled project.
 		Since there is no direct dependecy, the rules can follow a different life cycle.</description>
@@ -34,6 +34,23 @@
 			<artifactId>kie-internal</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+	<groupId>org.jbpm</groupId>
+		<artifactId>jbpm-workitems</artifactId>
+		<version>6.5.0.Final-redhat-2</version>
+		<scope>provided</scope>
+	</dependency>
+
+     	        <dependency>
+  		  <groupId>org.apache.velocity</groupId>
+  		  <artifactId>velocity</artifactId>
+  		  <version>1.7</version>
+   	        </dependency>
+  	        <dependency>
+  		  <groupId>org.apache.velocity</groupId>
+  		  <artifactId>velocity-tools</artifactId>
+  		  <version>2.0</version>
+  	        </dependency>
 	</dependencies>
 
 	<!-- Java 1.8 -->
