@@ -1,7 +1,9 @@
 package loose.rules.wih;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,6 +14,8 @@ import org.kie.api.builder.KieScanner;
 import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
+import org.kie.api.definition.KiePackage;
+import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.StatelessKieSession;
@@ -59,6 +63,7 @@ public class LooseRulesWorkItemHandler implements WorkItemHandler {
 			
 			parameters.remove("TaskName");
 			String kbaseName = (String) parameters.remove("kbaseName");
+			printRuleInfo(kieContainer);
 			
 			kieBase = kieContainer.getKieBase(kbaseName);
 			
@@ -69,6 +74,22 @@ public class LooseRulesWorkItemHandler implements WorkItemHandler {
 			e.printStackTrace();
 			manager.abortWorkItem(workItem.getId());
 		}
+	}
+	
+	private void printRuleInfo(KieContainer kieContainer) {
+		Collection<String> allTheNames = kieContainer.getKieBaseNames();
+		System.out.println("------------------start---------------------");
+		for (String sample : allTheNames) {
+			System.out.println("the name: " + sample);
+			Collection<KiePackage> packages = kieContainer.getKieBase(sample).getKiePackages();
+			for (KiePackage kiePackage : packages) {
+				Collection<Rule> rules = kiePackage.getRules();
+				for (Rule rule : rules) {
+					System.out.println("rule name: " + rule.getName());
+				}
+			}
+		}
+		System.out.println("------------------end---------------------");
 	}
 
 	public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
