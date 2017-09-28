@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>example</groupId>
 	<artifactId>email-template-wih</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<description>Work Item Handler to call rules from a loosely coupled project.
 		Since there is no direct dependecy, the rules can follow a different life cycle.</description>
 
@@ -16,7 +16,7 @@
 				<artifactId>jboss-brms-bpmsuite-platform-bom</artifactId>
 				<version>6.4.3.GA-redhat-2</version>
 				<type>pom</type>
-				<scope>import</scope>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -24,33 +24,22 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-internal</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 	<groupId>org.jbpm</groupId>
 		<artifactId>jbpm-workitems</artifactId>
 		<version>6.5.0.Final-redhat-2</version>
 		<scope>provided</scope>
 	</dependency>
 
-     	        <dependency>
-  		  <groupId>org.apache.velocity</groupId>
-  		  <artifactId>velocity</artifactId>
-  		  <version>1.7</version>
+<!--      	        <dependency>
+  		  		<groupId>org.apache.velocity</groupId>
+  		  		<artifactId>velocity</artifactId>
+  		  		<version>1.7</version>
    	        </dependency>
   	        <dependency>
-  		  <groupId>org.apache.velocity</groupId>
-  		  <artifactId>velocity-tools</artifactId>
-  		  <version>2.0</version>
-  	        </dependency>
+  		 		 <groupId>org.apache.velocity</groupId>
+  		  		<artifactId>velocity-tools</artifactId>
+  		  		<version>2.0</version>
+  	        </dependency> -->
 	</dependencies>
 
 	<!-- Java 1.8 -->
@@ -63,6 +52,13 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>6.5.0.Final-redhat-2</version>
+        <extensions>true</extensions>
+      </plugin>
 		</plugins>
 	</build>
 

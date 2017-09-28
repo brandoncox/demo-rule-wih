@@ -3,7 +3,6 @@ package loose.rules.wih;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,12 +67,16 @@ public class LooseRulesWorkItemHandler implements WorkItemHandler {
 			kieBase = kieContainer.getKieBase(kbaseName);
 			
 			handleStateless(workItem, parameters, results);
-			
+			System.out.println("finished processing the rules for " + workItem.getId());
 			manager.completeWorkItem(workItem.getId(), results);
+			System.out.println("finished processing the rules for here");
+			manager.abortWorkItem(workItem.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			manager.abortWorkItem(workItem.getId());
 		}
+		
+		manager.completeWorkItem(workItem.getId(), null);
 	}
 	
 	private void printRuleInfo(KieContainer kieContainer) {
@@ -89,6 +92,7 @@ public class LooseRulesWorkItemHandler implements WorkItemHandler {
 				}
 			}
 		}
+		
 		System.out.println("------------------end---------------------");
 	}
 

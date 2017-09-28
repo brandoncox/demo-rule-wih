@@ -1,19 +1,15 @@
 package com.custom.email;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.jbpm.process.workitem.AbstractLogOrThrowWorkItemHandler;
 import org.jbpm.process.workitem.email.Connection;
 import org.jbpm.process.workitem.email.Email;
-import org.jbpm.process.workitem.email.EmailWorkItemHandler;
 import org.jbpm.process.workitem.email.Message;
 import org.jbpm.process.workitem.email.Recipient;
 import org.jbpm.process.workitem.email.Recipients;
 import org.jbpm.process.workitem.email.SendHtml;
 import org.kie.api.runtime.process.WorkItem;
-import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.api.runtime.process.WorkItemManager;
 
 public class CustomEmailTemplateWorkItemHandler extends AbstractLogOrThrowWorkItemHandler{
@@ -116,10 +112,8 @@ public class CustomEmailTemplateWorkItemHandler extends AbstractLogOrThrowWorkIt
             }       
         }
         
-        /**
-         * Customization
-         */
-		String body = CustomEmailTemplateGenerator.templateizeEmail(workItem.getParameters(), (String)workItem.getParameter("templateName"));
+        
+		String body = CustomEmailTemplateGenerator.templateizeEmail(workItem, (String)workItem.getParameter("templateName"));
 
         // Fill message
         message.setRecipients(recipients);
